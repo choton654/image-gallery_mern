@@ -107,7 +107,7 @@ const SingleImage = (props) => {
                   Comments <span>{image.comments?.length || 0}</span>
                 </button>
                 {image && user ? (
-                  image.user === user._id ? (
+                  image.user?._id === user._id ? (
                     <>
                       <button
                         onClick={() => openModal(image)}
