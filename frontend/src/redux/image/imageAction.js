@@ -186,7 +186,7 @@ export const deleteImage = (id) => async (dispatch) => {
     const res = await axios.delete(`/api/images/${id}`, config);
     dispatch({
       type: DELETE_IMAGE,
-      payload: res.data,
+      payload: id,
     });
   } catch (err) {
     dispatch({

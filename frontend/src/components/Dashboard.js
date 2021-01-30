@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { deleteImage } from "../redux/image/imageAction";
 import { loadUser, logout } from "../redux/user/userAction";
 import CreateImage from "./CreateImage";
 
@@ -44,6 +45,12 @@ function Dashboard() {
                   />
                 </Link>
                 <h2 style={{ color: "#fff" }}>{image.title}</h2>
+                <button
+                  onClick={() => dispatch(deleteImage(image._id))}
+                  className="btn btn-danger"
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>

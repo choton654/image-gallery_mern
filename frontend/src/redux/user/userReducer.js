@@ -1,4 +1,4 @@
-import { ADD_IMAGE } from "../image/imageTypes";
+import { ADD_IMAGE, DELETE_IMAGE } from "../image/imageTypes";
 import {
   AUTH_ERROR,
   LOGIN_FAIL,
@@ -33,6 +33,12 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         images: [...state.images, action.payload],
+        loading: false,
+      };
+    case DELETE_IMAGE:
+      return {
+        ...state,
+        images: state.images.filter((image) => image._id !== action.payload),
         loading: false,
       };
     case REGISTER_SUCCESS:
