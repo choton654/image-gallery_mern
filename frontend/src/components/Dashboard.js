@@ -29,6 +29,7 @@ function Dashboard() {
         Logout
       </button>
       <CreateImage />
+      <h4 style={{ color: "#fff" }}>Your Images</h4>
       {images ? (
         <div className="container-fluid">
           <div className="row">

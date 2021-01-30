@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/user/userAction";
+import { Link } from "react-router-dom";
 
 const RegisterPage = (props) => {
   const [user, setUser] = useState({
@@ -45,53 +46,62 @@ const RegisterPage = (props) => {
           <h4 className="text-light"> refresh the page</h4>
         </div>
       ) : (
-        <form onSubmit={handelSubmit}>
-          <div className="form-group">
-            <label className="text-light" htmlFor="exampleInputEmail1">
-              Email address
-            </label>
-            <input
-              type="email"
-              onChange={handelChange}
-              name="email"
-              value={user.email}
-              className="form-control"
-              placeholder="Enter email"
-              required
-            />
+        <div>
+          <h2 style={{ color: "#fff" }}>Signup</h2>
+          <form onSubmit={handelSubmit}>
+            <div className="form-group">
+              <label className="text-light" htmlFor="exampleInputEmail1">
+                Email address
+              </label>
+              <input
+                type="email"
+                onChange={handelChange}
+                name="email"
+                value={user.email}
+                className="form-control"
+                placeholder="Enter email"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label className="text-light" htmlFor="exampleInputName">
+                Name
+              </label>
+              <input
+                type="text"
+                onChange={handelChange}
+                name="name"
+                value={user.name}
+                className="form-control"
+                placeholder="Enter name"
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label className="text-light" htmlFor="exampleInputPassword1">
+                Password
+              </label>
+              <input
+                type="password"
+                onChange={handelChange}
+                name="password"
+                value={user.password}
+                className="form-control"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+          <div>
+            <div style={{ color: "#fff" }}>Already have account?</div>
+            <Link to="/login">
+              <span>Login</span>
+            </Link>
           </div>
-          <div className="form-group">
-            <label className="text-light" htmlFor="exampleInputName">
-              Name
-            </label>
-            <input
-              type="text"
-              onChange={handelChange}
-              name="name"
-              value={user.name}
-              className="form-control"
-              placeholder="Enter name"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label className="text-light" htmlFor="exampleInputPassword1">
-              Password
-            </label>
-            <input
-              type="password"
-              onChange={handelChange}
-              name="password"
-              value={user.password}
-              className="form-control"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
+        </div>
       )}
     </div>
   );

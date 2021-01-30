@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { clearError, login } from "../redux/user/userAction";
 
 const LoginPage = (props) => {
@@ -46,6 +46,7 @@ const LoginPage = (props) => {
       )}
       (
       <div>
+        <h2 style={{ color: "#fff" }}>Login</h2>
         <form onSubmit={handelSubmit}>
           <div className="form-group">
             <label className="text-light" htmlFor="exampleInputEmail1">
@@ -79,6 +80,12 @@ const LoginPage = (props) => {
             Submit
           </button>
         </form>
+        <div>
+          <div style={{ color: "#fff" }}>New user?</div>
+          <Link to="/signup">
+            <span>SignUp</span>
+          </Link>
+        </div>
       </div>
       )
     </div>

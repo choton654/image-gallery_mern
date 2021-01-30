@@ -33,6 +33,7 @@ const CreateImage = (props) => {
 
   return (
     <div className="container py-4">
+      <h2 style={{ color: "#fff" }}>Create your post</h2>
       <form onSubmit={handelSubmit}>
         <div className="form-group">
           <label style={{ color: "#fff" }} htmlFor="exampleInputEmail1">
