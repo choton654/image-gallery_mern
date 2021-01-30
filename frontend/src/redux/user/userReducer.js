@@ -1,3 +1,4 @@
+import { ADD_IMAGE } from "../image/imageTypes";
 import {
   AUTH_ERROR,
   LOGIN_FAIL,
@@ -6,14 +7,16 @@ import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
   USER_LOADED,
-} from './userTypes';
+  CL_ERROR,
+} from "./userTypes";
 
 const initialState = {
-  token: localStorage.getItem('token'),
-  isAuthenticated: false,
+  token: localStorage.getItem("token"),
+  isAuthenticated: localStorage.getItem("token") ? true : false,
   loading: true,
   error: null,
   user: null,
+  images: null,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -23,11 +26,18 @@ export const userReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: action.payload,
+        user: action.payload.user,
+        images: action.payload.userImages,
+      };
+    case ADD_IMAGE:
+      return {
+        ...state,
+        images: [...state.images, action.payload],
+        loading: false,
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', action.payload.token);
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         ...action.payload,
@@ -38,7 +48,7 @@ export const userReducer = (state = initialState, action) => {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return {
         ...state,
         token: null,
@@ -46,6 +56,11 @@ export const userReducer = (state = initialState, action) => {
         loading: false,
         user: null,
         error: action.payload,
+      };
+    case CL_ERROR:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;

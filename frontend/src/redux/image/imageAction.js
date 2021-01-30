@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   ADD_IMAGE,
   ADD_IMAGE_REQUEST,
@@ -15,22 +15,24 @@ import {
   GET_ONE_IMAGE_ERROR,
   GET_ONE_IMAGE_REQUEST,
   IMAGE_ERROR,
-} from './imageTypes';
+  COMM,
+  LIKE_IMAGE,
+} from "./imageTypes";
 
 // Add Image
 export const addImage = (image) => async (dispatch) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const config = {
     headers: {
-      'Content-Type': 'application/json',
-      'x-auth-token': token,
+      "Content-Type": "application/json",
+      "x-auth-token": token,
     },
   };
 
   try {
     dispatch({ type: ADD_IMAGE_REQUEST });
 
-    const res = await axios.post('/api/images', image, config);
+    const res = await axios.post("/api/images", image, config);
     dispatch({
       type: ADD_IMAGE,
       payload: res.data,
@@ -47,14 +49,14 @@ export const addImage = (image) => async (dispatch) => {
 export const getImages = () => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   try {
     dispatch({ type: GET_IMAGE_REQUEST });
 
-    const res = await axios.get('/api/images', config);
+    const res = await axios.get("/api/images", config);
     dispatch({
       type: GET_IMAGE,
       payload: res.data,
@@ -71,7 +73,7 @@ export const getImages = () => async (dispatch) => {
 export const getOneImg = (id) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
@@ -93,11 +95,11 @@ export const getOneImg = (id) => async (dispatch) => {
 
 // edit image
 export const editImage = (image) => async (dispatch) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const config = {
     headers: {
-      'Content-Type': 'application/json',
-      'x-auth-token': token,
+      "Content-Type": "application/json",
+      "x-auth-token": token,
     },
   };
   try {
@@ -116,12 +118,66 @@ export const editImage = (image) => async (dispatch) => {
   }
 };
 
-// delete image
-export const deleteImage = (id) => async (dispatch) => {
-  const token = localStorage.getItem('token');
+// like image
+export const likeImage = (imageId) => async (dispatch) => {
+  const token = localStorage.getItem("token");
   const config = {
     headers: {
-      'x-auth-token': token,
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  try {
+    dispatch({ type: EDIT_IMAGE_REQUEST });
+
+    const res = await axios.put(`/api/images/like/${imageId}`, config);
+    dispatch({
+      type: LIKE_IMAGE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: EDIT_IMAGE_ERROR,
+      payload: err,
+    });
+  }
+};
+
+//  add comment
+export const addComment = (text, imageId) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": token,
+    },
+  };
+  try {
+    dispatch({ type: EDIT_IMAGE_REQUEST });
+
+    const res = await axios.put(
+      `/api/images/comment/${imageId}`,
+      { text },
+      config
+    );
+    dispatch({
+      type: COMM,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: EDIT_IMAGE_ERROR,
+      payload: err,
+    });
+  }
+};
+
+// delete image
+export const deleteImage = (id) => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      "x-auth-token": token,
     },
   };
   try {

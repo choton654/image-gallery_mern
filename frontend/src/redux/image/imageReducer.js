@@ -14,12 +14,15 @@ import {
   GET_ONE_IMAGE_ERROR,
   GET_ONE_IMAGE_REQUEST,
   IMAGE_ERROR,
-} from './imageTypes';
+  LIKE_IMAGE,
+  COMM,
+} from "./imageTypes";
 
 const initialState = {
   images: [],
   image: {},
   error: null,
+  loading: false,
 };
 
 export const imageReducer = (state = initialState, action) => {
@@ -55,16 +58,21 @@ export const imageReducer = (state = initialState, action) => {
         loading: false,
       };
     case GET_ONE_IMAGE:
+    case LIKE_IMAGE:
+    case COMM:
       return {
         ...state,
         image: action.payload,
+        images: state.images.map((image) =>
+          image._id === action.payload._id ? action.payload : image
+        ),
         loading: false,
       };
     case EDIT_IMAGE:
       return {
         ...state,
         images: state.images.map((image) =>
-          image._id === action.payload._id ? action.payload : image,
+          image._id === action.payload._id ? action.payload : image
         ),
         loading: false,
       };

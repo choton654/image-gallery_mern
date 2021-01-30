@@ -1,5 +1,5 @@
-import axios from 'axios';
-import setAuthToken from '../utils';
+import axios from "axios";
+import setAuthToken from "../utils";
 import {
   AUTH_ERROR,
   LOGIN_FAIL,
@@ -8,15 +8,15 @@ import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
   USER_LOADED,
-} from './userTypes';
+  CL_ERROR,
+} from "./userTypes";
 
 // Load User
 export const loadUser = () => async (dispatch) => {
   setAuthToken(localStorage.token);
 
   try {
-    const res = await axios.get('/api/auth');
-
+    const res = await axios.get("/api/auth");
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -30,12 +30,12 @@ export const loadUser = () => async (dispatch) => {
 export const register = (user) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   try {
-    const res = await axios.post('/api/user', user, config);
+    const res = await axios.post("/api/user", user, config);
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -52,22 +52,24 @@ export const register = (user) => async (dispatch) => {
 };
 
 // Login User
-export const login = (formdata) => async (dispatch) => {
+export const login = (formdata, history) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   try {
-    const res = await axios.post('/api/auth', formdata, config);
-
+    const res = await axios.post("/api/auth", formdata, config);
+    // localStorage.getItem("token")
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
+    localStorage.setItem("user", JSON.stringify(res.data.user));
 
     loadUser();
+    history.push("/dashboard");
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,
@@ -78,3 +80,4 @@ export const login = (formdata) => async (dispatch) => {
 
 // Logout
 export const logout = () => (dispatch) => dispatch({ type: LOGOUT });
+export const clearError = () => (dispatch) => dispatch({ type: CL_ERROR });

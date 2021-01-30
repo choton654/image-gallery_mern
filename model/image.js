@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const imageSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'users',
+    ref: "user",
     required: true,
   },
   title: {
@@ -16,8 +16,16 @@ const imageSchema = mongoose.Schema({
   },
   description: {
     type: String,
-    default: 'my image',
+    default: "my image",
   },
+  comments: [
+    {
+      text: String,
+      createdAt: { type: Date, default: Date.now },
+      postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
+    },
+  ],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 });
 
-module.exports = mongoose.model('image', imageSchema);
+module.exports = mongoose.models.image || mongoose.model("image", imageSchema);
