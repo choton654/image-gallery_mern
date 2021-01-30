@@ -21,7 +21,7 @@ app.use("/api/images", require("./routes/images"));
 //   app.use(express.static('frontend/build'));
 // }
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 // app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 if (process.env.NODE_ENV === "production") {
