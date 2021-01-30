@@ -27,7 +27,7 @@ const ImagePage = (props) => {
           images.map((image) => (
             <div key={image._id} className="col-sm-6 col-md-4 py-3">
               <div>
-                <Link to={`/images/${image._id}`}>
+                <Link to={`/images/${image._id}/${image.user.name}`}>
                   <img
                     style={{
                       width: "100%",
@@ -37,17 +37,22 @@ const ImagePage = (props) => {
                     className="img-thumbnail img-fluid"
                   ></img>
                 </Link>
-                <button
-                  onClick={() => {
-                    if (!isAuthenticated) {
-                      history.push("/login");
-                    }
-                    dispatch(likeImage(image._id));
-                  }}
-                  className="btn btn-primary"
-                >
-                  Like <span>{image.likes?.length || 0}</span>
-                </button>
+                <div style={{ display: "flex", flexDirection: "row" }}>
+                  <button
+                    onClick={() => {
+                      if (!isAuthenticated) {
+                        history.push("/login");
+                      }
+                      dispatch(likeImage(image._id));
+                    }}
+                    className="btn btn-primary"
+                  >
+                    Like <span>{image.likes?.length || 0}</span>
+                  </button>
+                  <p className="card-text px-2" style={{ color: "#fff" }}>
+                    by {image.user.name}
+                  </p>
+                </div>
               </div>
             </div>
           ))}

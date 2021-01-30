@@ -8,7 +8,7 @@ const auth = require("../middleware/auth");
 // access   public
 router.get("/", async (req, res) => {
   try {
-    const images = await Image.find({});
+    const images = await Image.find({}).populate("user", "_id name");
     res.json(images);
   } catch (error) {
     console.error(err.message);
@@ -21,10 +21,9 @@ router.get("/", async (req, res) => {
 // access   public
 router.get("/:id", async (req, res) => {
   try {
-    const image = await Image.findOne({ _id: req.params.id }).populate(
-      "comments.postedBy",
-      "_id name"
-    );
+    const image = await Image.findOne({ _id: req.params.id })
+      .populate("comments.postedBy", "_id name")
+      .populate("user", "_id name");
     if (!image) {
       res.status(400).json({ msg: "No image found" });
     }

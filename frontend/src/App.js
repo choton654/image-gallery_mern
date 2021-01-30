@@ -23,7 +23,11 @@ function App() {
           <Route exact path="/signup" component={RegisterPage} />
           {/* <PrivateRoute exact path="/createimage" component={CreateImage} /> */}
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/images/:id" component={SingleImage} />
+          <PrivateRoute
+            exact
+            path="/images/:id/:name?"
+            component={SingleImage}
+          />
           <Route exact path="/images" component={ImagePage} />
           <Route path="*" component={() => <h1>404 NOT FOUND</h1>} />
         </Switch>

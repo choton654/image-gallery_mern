@@ -35,7 +35,7 @@ function Dashboard() {
           <div className="row">
             {images.map((image, idx) => (
               <div key={image._id} className="col-sm-6 col-md-4 py-3">
-                <Link to={`/images/${image._id}`}>
+                <Link to={`/images/${image._id}/${user.name}`}>
                   <img
                     style={{
                       width: "100%",

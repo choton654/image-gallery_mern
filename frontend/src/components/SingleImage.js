@@ -81,6 +81,7 @@ const SingleImage = (props) => {
           <div className="card-body">
             <h3 className="card-title">{image.title}</h3>
             <p className="card-text">{image.description}</p>
+            <p className="card-text">by {props.computedMatch.params.name}</p>
           </div>
           <div>
             {isAuthenticated && (
