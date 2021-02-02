@@ -31,32 +31,38 @@ function Dashboard() {
       <CreateImage />
       <h4 style={{ color: "#fff" }}>Your Images</h4>
       {images ? (
-        <div className="container-fluid">
-          <div className="row">
-            {images.map((image, idx) => (
-              <div key={image._id} className="col-sm-6 col-md-4 py-3">
-                <Link to={`/images/${image._id}/${user.name}`}>
-                  <img
-                    style={{
-                      width: "100%",
-                    }}
-                    src={image.imageUrl}
-                    alt="image"
-                    className="img-thumbnail img-fluid"
-                  />
-                </Link>
-                <h2 style={{ color: "#fff" }}>{image.title}</h2>
-                <button
-                  onClick={() => dispatch(deleteImage(image._id))}
-                  className="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
+        images.length > 0 ? (
+          <div className="container-fluid">
+            <div className="row">
+              {images.map((image, idx) => (
+                <div key={image._id} className="col-sm-6 col-md-4 py-3">
+                  <Link to={`/images/${image._id}/${user.name}`}>
+                    <img
+                      style={{
+                        width: "100%",
+                      }}
+                      src={image.imageUrl}
+                      alt="image"
+                      className="img-thumbnail img-fluid"
+                    />
+                  </Link>
+                  <h2 style={{ color: "#fff" }}>{image.title}</h2>
+                  <button
+                    onClick={() => dispatch(deleteImage(image._id))}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      ) : null}
+        ) : (
+          <p style={{ color: "#fff" }}>you have no images, create some</p>
+        )
+      ) : (
+        <p style={{ color: "#fff" }}>you have no images, create some</p>
+      )}
     </div>
   );
 }

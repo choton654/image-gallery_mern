@@ -12,7 +12,7 @@ const ImagePage = (props) => {
   const history = useHistory();
   useEffect(() => {
     dispatch(getImages());
-    dispatch(loadUser());
+    // dispatch(loadUser());
   }, []);
 
   if (loading) {

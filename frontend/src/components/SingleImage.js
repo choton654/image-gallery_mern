@@ -18,9 +18,9 @@ const SingleImage = (props) => {
   const { isAuthenticated, user } = useSelector((state) => state.User);
 
   const [newImage, setNewImage] = useState({
-    title: image.title || "",
-    imageUrl: image.imageUrl || "",
-    description: image.description || "",
+    title: image ? image.title : "",
+    imageUrl: image ? image.imageUrl : "",
+    description: image ? image.description : "",
   });
   const [text, settext] = useState("");
   const dispatch = useDispatch();

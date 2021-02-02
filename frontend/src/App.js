@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import CreateImage from "./components/CreateImage";
-import EditImage from "./components/EditImage";
 import HomePage from "./components/HomePage";
 import ImagePage from "./components/ImagePage";
 import LoginPage from "./components/LoginPage";
@@ -21,7 +19,6 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={RegisterPage} />
-          {/* <PrivateRoute exact path="/createimage" component={CreateImage} /> */}
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute
             exact

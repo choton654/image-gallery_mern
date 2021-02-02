@@ -80,7 +80,9 @@ router.put("/:id", auth, async (req, res) => {
       req.params.id,
       { $set: imageFields },
       { new: true }
-    ).populate("comments.postedBy", "_id name");
+    )
+      .populate("comments.postedBy", "_id name")
+      .populate("user", "_id name");
 
     return res.json(image);
   } catch (error) {

@@ -42,7 +42,7 @@ export const register = (user) => async (dispatch) => {
       payload: res.data,
     });
 
-    loadUser();
+    // loadUser();
   } catch (err) {
     dispatch({
       type: REGISTER_FAIL,
